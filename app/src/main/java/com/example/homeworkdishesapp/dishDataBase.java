@@ -19,6 +19,5 @@ public abstract class dishDataBase extends RoomDatabase {
         }
         return instance;
     }
-
     public abstract DishesDAO dishDao();
 }

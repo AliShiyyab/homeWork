@@ -15,11 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class menuPage extends AppCompatActivity {
-
-    private dishAdapter adapter;
+    //create an object of database dishes and object of the Data Access Object interfaces
     private  dishDataBase db;
     private DishesDAO dishesDAO;
-    private List<Dish> dishes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,23 +25,21 @@ public class menuPage extends AppCompatActivity {
         setContentView(R.layout.activity_menu_page);
 
         db = Room.databaseBuilder(getApplicationContext(),
-                dishDataBase.class, "dish_table").allowMainThreadQueries().build();
+                dishDataBase.class, "dish_table").allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
+                .build();
 
-        dishesDAO = db.dishDao();
-        dishes = dishesDAO.getAllDish();
-
-
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        //used the query to returned all data
+        List<Dish> dishes = db.dishDao().getAllDish();
 
         RecyclerView allTasksRecuclerView = findViewById(R.id.recyclerViewMenu);
-        allTasksRecuclerView.setAdapter(adapter);
-        allTasksRecuclerView.setLayoutManager(linearLayoutManager);
+        allTasksRecuclerView.setLayoutManager(new LinearLayoutManager(this));
+        allTasksRecuclerView.setAdapter(new dishAdapter(dishes));
 
 
 
+        //this button used to sending me a home page
         Button btn3 = findViewById(R.id.homePage);
-
         btn3.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {

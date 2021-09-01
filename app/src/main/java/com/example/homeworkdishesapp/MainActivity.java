@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         Button btn2 = findViewById(R.id.menu);
 
         //setOnClickListner function
+        //create tow buttons to sending me to other pages
         btn1.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {

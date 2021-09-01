@@ -18,6 +18,7 @@ public class activityFragmentDishes extends Fragment {
 
     public activityFragmentDishes(){}
 
+
     public static activityFragmentDishes newInstance(String mName, String mPrice , String mIngredient) {
         activityFragmentDishes fragment = new activityFragmentDishes();
         Bundle args = new Bundle();
